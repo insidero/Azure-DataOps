@@ -1,0 +1,45 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "Azul-data-factory"
+		},
+		"AzureBlobStorage_AzulStorageAccount_connectionString": {
+			"value": ""
+		},
+		"AzureBlobStorage_stemdev_connectionString": {
+			"value": ""
+		},
+		"AzureSynapseAnalytics1_connectionString": {
+			"value": ""
+		},
+		"BlobStorage_covid_19_connectionString": {
+			"value": ""
+		},
+		"github_osama_password": {
+			"value": ""
+		},
+		"osama_sql_connectionString": {
+			"value": ""
+		},
+		"RestService1_properties_typeProperties_url": {
+			"value": "https://covidtracking.com/api/v1/states/current.json"
+		},
+		"github_osama_properties_typeProperties_url": {
+			"value": "https://github.com/"
+		},
+		"github_osama_properties_typeProperties_userName": {
+			"value": "osamaemumba"
+		},
+		"osama_rest_json_properties_typeProperties_url": {
+			"value": "https://opendata.ecdc.europa.eu/covid19/casedistribution/json/"
+		},
+		"osama_rest_json_1_properties_typeProperties_url": {
+			"value": "https://opendata.ecdc.europa.eu/covid19/casedistribution/json/"
+		},
+		"osama_rest_json_2_properties_typeProperties_url": {
+			"value": "https://covidtracking.com/api/v1/states/current.json"
+		}
+	}
+}

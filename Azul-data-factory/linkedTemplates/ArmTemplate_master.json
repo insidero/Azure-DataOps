@@ -1,0 +1,146 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "Azul-data-factory"
+		},
+		"AzureBlobStorage_AzulStorageAccount_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage_AzulStorageAccount'"
+		},
+		"AzureBlobStorage_stemdev_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureBlobStorage_stemdev'"
+		},
+		"AzureSynapseAnalytics1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSynapseAnalytics1'"
+		},
+		"BlobStorage_covid_19_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'BlobStorage_covid_19'"
+		},
+		"github_osama_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'github_osama'"
+		},
+		"osama_sql_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'osama_sql'"
+		},
+		"RestService1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://covidtracking.com/api/v1/states/current.json"
+		},
+		"github_osama_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://github.com/"
+		},
+		"github_osama_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "osamaemumba"
+		},
+		"osama_rest_json_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://opendata.ecdc.europa.eu/covid19/casedistribution/json/"
+		},
+		"osama_rest_json_1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://opendata.ecdc.europa.eu/covid19/casedistribution/json/"
+		},
+		"osama_rest_json_2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://covidtracking.com/api/v1/states/current.json"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureBlobStorage_AzulStorageAccount_connectionString": {
+						"value": "[parameters('AzureBlobStorage_AzulStorageAccount_connectionString')]"
+					},
+					"AzureBlobStorage_stemdev_connectionString": {
+						"value": "[parameters('AzureBlobStorage_stemdev_connectionString')]"
+					},
+					"AzureSynapseAnalytics1_connectionString": {
+						"value": "[parameters('AzureSynapseAnalytics1_connectionString')]"
+					},
+					"BlobStorage_covid_19_connectionString": {
+						"value": "[parameters('BlobStorage_covid_19_connectionString')]"
+					},
+					"github_osama_password": {
+						"value": "[parameters('github_osama_password')]"
+					},
+					"osama_sql_connectionString": {
+						"value": "[parameters('osama_sql_connectionString')]"
+					},
+					"RestService1_properties_typeProperties_url": {
+						"value": "[parameters('RestService1_properties_typeProperties_url')]"
+					},
+					"github_osama_properties_typeProperties_url": {
+						"value": "[parameters('github_osama_properties_typeProperties_url')]"
+					},
+					"github_osama_properties_typeProperties_userName": {
+						"value": "[parameters('github_osama_properties_typeProperties_userName')]"
+					},
+					"osama_rest_json_properties_typeProperties_url": {
+						"value": "[parameters('osama_rest_json_properties_typeProperties_url')]"
+					},
+					"osama_rest_json_1_properties_typeProperties_url": {
+						"value": "[parameters('osama_rest_json_1_properties_typeProperties_url')]"
+					},
+					"osama_rest_json_2_properties_typeProperties_url": {
+						"value": "[parameters('osama_rest_json_2_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
+			]
+		}
+	]
+}
