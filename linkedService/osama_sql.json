@@ -1,0 +1,12 @@
+{
+	"name": "osama_sql",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=testing-bacpac.database.windows.net;initial catalog=testing-database;user id=testing-bacpac",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkFaVUwtREFUQS1GQUNUT1JZX2E1ZWFhZjIxLTFhMzYtNDIxZS1iNTZkLTVkMmJjNGYwNzg2YSINCn0="
+		}
+	}
+}

@@ -1,0 +1,22 @@
+{
+	"name": "Covid-CSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage_stemdev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "covid-19-csv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

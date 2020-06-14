@@ -1,0 +1,108 @@
+{
+	"name": "osama_file_json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage_stemdev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "conposcovidloc.geojson",
+				"container": "osama-json1"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"type": {
+					"type": "string"
+				},
+				"features": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"geometry": {
+								"type": "object",
+								"properties": {
+									"type": {
+										"type": "string"
+									},
+									"coordinates": {
+										"type": "array",
+										"items": {
+											"type": "number"
+										}
+									}
+								}
+							},
+							"type": {
+								"type": "string"
+							},
+							"properties": {
+								"type": "object",
+								"properties": {
+									"Case_AcquisitionInfo": {
+										"type": "string"
+									},
+									"Reporting_PHU_Postal_Code": {
+										"type": "string"
+									},
+									"Client_Gender": {
+										"type": "string"
+									},
+									"Outbreak_Related": {
+										"type": "string"
+									},
+									"OBJECTID": {
+										"type": "integer"
+									},
+									"Accurate_Episode_Date": {
+										"type": "string"
+									},
+									"Outcome1": {
+										"type": "string"
+									},
+									"Reporting_PHU_City": {
+										"type": "string"
+									},
+									"Reporting_PHU_Latitude": {
+										"type": "number"
+									},
+									"Reporting_PHU_Website": {
+										"type": "string"
+									},
+									"Row_ID": {
+										"type": "integer"
+									},
+									"_id": {
+										"type": "integer"
+									},
+									"Age_Group": {
+										"type": "string"
+									},
+									"Reporting_PHU_Address": {
+										"type": "string"
+									},
+									"Reporting_PHU_Longitude": {
+										"type": "number"
+									},
+									"Reporting_PHU": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"resource_id": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

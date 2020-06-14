@@ -1,0 +1,56 @@
+{
+	"name": "JsonSourceLoad",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage_stemdev",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"container": "covid-19"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "integer"
+				},
+				"updated": {
+					"type": "string"
+				},
+				"confirmed": {
+					"type": "integer"
+				},
+				"deaths": {
+					"type": "integer"
+				},
+				"country_region": {
+					"type": "string"
+				},
+				"load_time": {
+					"type": "string"
+				},
+				"confirmed_change": {
+					"type": "integer"
+				},
+				"deaths_change": {
+					"type": "integer"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

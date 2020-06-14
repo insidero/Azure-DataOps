@@ -1,0 +1,24 @@
+{
+	"name": "osama_rest_csv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage_stemdev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "data_b6c5aeb2-f699-4f76-964e-bc871305a6c3_e82fad25-af96-4afa-b639-351aaa8e32f9.csv",
+				"container": "osama-csv1"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

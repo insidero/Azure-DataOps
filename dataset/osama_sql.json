@@ -1,0 +1,17 @@
+{
+	"name": "osama_sql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "osama_sql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "covid"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

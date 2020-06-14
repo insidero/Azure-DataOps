@@ -1,0 +1,13 @@
+{
+	"name": "osama_rest_json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "osama_rest_json_1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

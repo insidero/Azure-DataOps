@@ -1,0 +1,93 @@
+{
+	"name": "GetParquetFromBlob",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage_stemdev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "parquet-synapse"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "id",
+				"type": "INT32"
+			},
+			{
+				"name": "updated",
+				"type": "DATE"
+			},
+			{
+				"name": "confirmed",
+				"type": "INT32"
+			},
+			{
+				"name": "confirmed_change",
+				"type": "INT32"
+			},
+			{
+				"name": "deaths",
+				"type": "INT32"
+			},
+			{
+				"name": "deaths_change",
+				"type": "INT_16"
+			},
+			{
+				"name": "recovered",
+				"type": "INT32"
+			},
+			{
+				"name": "recovered_change",
+				"type": "INT32"
+			},
+			{
+				"name": "latitude",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "longitude",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "iso2",
+				"type": "UTF8"
+			},
+			{
+				"name": "iso3",
+				"type": "UTF8"
+			},
+			{
+				"name": "country_region",
+				"type": "UTF8"
+			},
+			{
+				"name": "admin_region_1",
+				"type": "UTF8"
+			},
+			{
+				"name": "iso_subdivision",
+				"type": "UTF8"
+			},
+			{
+				"name": "admin_region_2",
+				"type": "UTF8"
+			},
+			{
+				"name": "admin_region_2_code",
+				"type": "UTF8"
+			},
+			{
+				"name": "load_time",
+				"type": "INT96"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
