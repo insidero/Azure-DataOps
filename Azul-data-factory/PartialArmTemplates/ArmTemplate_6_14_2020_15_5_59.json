@@ -1,0 +1,542 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "Azul-data-factory"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Test_pipline')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "osama_json_to_csv_1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET"
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings",
+									"copyBehavior": "PreserveHierarchy"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".csv"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "[['dateRep']"
+										},
+										"sink": {
+											"name": "dateRep",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['day']"
+										},
+										"sink": {
+											"name": "day",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['month']"
+										},
+										"sink": {
+											"name": "month",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['year']"
+										},
+										"sink": {
+											"name": "year",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['cases']"
+										},
+										"sink": {
+											"name": "cases",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['deaths']"
+										},
+										"sink": {
+											"name": "deaths",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['countriesAndTerritories']"
+										},
+										"sink": {
+											"name": "countriesAndTerritories",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['geoId']"
+										},
+										"sink": {
+											"name": "geoId",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['countryterritoryCode']"
+										},
+										"sink": {
+											"name": "countryterritoryCode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['popData2018']"
+										},
+										"sink": {
+											"name": "popData2018",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['continentExp']"
+										},
+										"sink": {
+											"name": "continentExp",
+											"type": "String"
+										}
+									}
+								],
+								"collectionReference": "$['records']",
+								"mapComplexValuesToString": true
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "osama_rest_json",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "osama_rest_csv",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "osama_json_to_csv_2",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "osama_json_to_csv_1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings",
+									"copyBehavior": "PreserveHierarchy"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".csv"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "[['geometry']['type']"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 1
+										}
+									},
+									{
+										"source": {
+											"path": "[['type']"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 2
+										}
+									},
+									{
+										"source": {
+											"path": "[['properties']['Case_AcquisitionInfo']"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 3
+										}
+									},
+									{
+										"source": {
+											"path": "[['properties']['Reporting_PHU_Postal_Code']"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 4
+										}
+									},
+									{
+										"source": {
+											"path": "[['properties']['Client_Gender']"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 5
+										}
+									},
+									{
+										"source": {
+											"path": "[['properties']['Outbreak_Related']"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 6
+										}
+									},
+									{
+										"source": {
+											"path": "[['properties']['Accurate_Episode_Date']"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 7
+										}
+									},
+									{
+										"source": {
+											"path": "[['properties']['Outcome1']"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 8
+										}
+									},
+									{
+										"source": {
+											"path": "[['properties']['Reporting_PHU_City']"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 9
+										}
+									},
+									{
+										"source": {
+											"path": "[['properties']['Reporting_PHU_Website']"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 10
+										}
+									},
+									{
+										"source": {
+											"path": "[['properties']['Age_Group']"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 11
+										}
+									},
+									{
+										"source": {
+											"path": "[['properties']['Reporting_PHU_Address']"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 12
+										}
+									},
+									{
+										"source": {
+											"path": "[['properties']['Reporting_PHU']"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 13
+										}
+									},
+									{
+										"source": {
+											"path": "$['type']"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 14
+										}
+									},
+									{
+										"source": {
+											"path": "$['resource_id']"
+										},
+										"sink": {
+											"type": "String",
+											"ordinal": 15
+										}
+									}
+								],
+								"collectionReference": "$['features']",
+								"mapComplexValuesToString": true
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "osama_file_json",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "osama_file_csv",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "osama_csv_to_sql_1",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "osama_json_to_csv_2",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"tableOption": "autoCreate"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "dateRep",
+											"type": "String"
+										},
+										"sink": {
+											"name": "dateRep",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "day",
+											"type": "String"
+										},
+										"sink": {
+											"name": "day",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "month",
+											"type": "String"
+										},
+										"sink": {
+											"name": "month",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "year",
+											"type": "String"
+										},
+										"sink": {
+											"name": "year",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "cases",
+											"type": "String"
+										},
+										"sink": {
+											"name": "cases",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "deaths",
+											"type": "String"
+										},
+										"sink": {
+											"name": "deaths",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "countriesAndTerritories",
+											"type": "String"
+										},
+										"sink": {
+											"name": "countriesAndTerritories",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "geoId",
+											"type": "String"
+										},
+										"sink": {
+											"name": "geoId",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "countryterritoryCode",
+											"type": "String"
+										},
+										"sink": {
+											"name": "countryterritoryCode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "popData2018",
+											"type": "String"
+										},
+										"sink": {
+											"name": "popData2018",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "continentExp",
+											"type": "String"
+										},
+										"sink": {
+											"name": "continentExp",
+											"type": "String"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "osama_rest_csv",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "osama_sql",
+								"type": "DatasetReference"
+							}
+						]
+					}
+				],
+				"annotations": []
+			},
+			"dependsOn": []
+		}
+	]
+}
