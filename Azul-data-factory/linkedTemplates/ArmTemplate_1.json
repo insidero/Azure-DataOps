@@ -840,14 +840,7 @@
 					{
 						"name": "osama_json_to_csv_2",
 						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "osama_json_to_csv_1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -1041,14 +1034,7 @@
 					{
 						"name": "osama_csv_to_sql_1",
 						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "osama_json_to_csv_2",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
+						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
